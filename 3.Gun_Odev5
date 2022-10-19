@@ -1,0 +1,47 @@
+--select 
+select ContactName Adi,City Sehir from Customers
+
+--Filtreleme
+Select * from Customers where City='London'
+
+select * from Products where CategoryID=1 or CategoryID=3
+
+select * from Products where CategoryID=1 and UnitPrice>=10
+
+select * from Products order by ProductName
+select * from Products order by CategoryID, ProductName
+select * from Products order by UnitPrice desc 
+
+select count(*) from Products
+
+select CategoryID, count (*) from Products group by CategoryID 
+select ProductName, count (*) from Products group by ProductName
+
+select CategoryID, count (*) from Products where UnitPrice>20 group by CategoryID  having count(*)<10
+
+select Products.ProductID,Products.ProductName,Products.UnitPrice,Categories.CategoryName from Products inner join Categories on Products.CategoryID=Categories.CategoryID
+
+select * from Products p left join [Order Details] od on p.ProductID=od.ProductID
+
+select * from Customers c inner join Orders o on c.CustomerID=o.CustomerID
+select * from Customers c left join Orders o on c.CustomerID=o.CustomerID where o.CustomerID is null
+
+--/////////////////////////////////////////////
+select ContactName Adi,City Sehir from Customers  bu şekilde yazıldığında  colon isimlerini kendisinden sonra gelen isim ile değiştirir
+
+select * from Products order by ProductName  ürünleri isimlerine göre sıralar
+
+select * from Products order by CategoryID, ProductName  ürünleri önce kategori numarasına göre sonra ürün ismine göre sıralar
+
+select * from Products order by UnitPrice desc  ürünleri fiyatlarına göre büyükten küçüğe göre sıralar
+
+select CategoryID, count (*) from Products group by CategoryID urunler tablosunda hangi categoride kaç adet ürün olduğunu gösterir. Burada dikkat edilmesi gereken durum group by yapılacak olan özellik MUTLAKA select sonrasında yazılmalıdır
+
+select CategoryID, count (*) from Products where UnitPrice>20 group by CategoryID  having count(*)<10  product tablosunda fiyatı 20 den büyük olan ve toplam adeti 10 dan küçük olan categorileri getir. HAVING sadece Kümülatif(count,sum,average) lere uygulanır.
+
+select Products.ProductID,Products.ProductName,Products.UnitPrice,Categories.CategoryName from Products inner join Categories on Products.CategoryID=Categories.CategoryID  urunler tablasundaki ürün id, ürün adı, fiyatı ile birlikte birleştirilen kategori tablosundan kategori adını getir. Buradaki şart,ürün tablosundaki kategori ID ile kategori tablosundaki kategori ID eşleştirir ve hangi ürün hangi kategoride ise onu yazar. 
+Kodun anlamı : ID leri ile birleştirilmiş olan ürün ve kategori tablosundan bana ürün id, ürün adı, fiyatı ile birlikte birleştirilen kategori tablosundan kategori adını getirir.
+
+Bunların yazılım dünyasında C# java gibi yerlerde kullanımına DTO (Data Transformation Object) olarak kullanılır.
+
+select * from Products p left join [Order Details] od on p.ProductID=od.ProductID  her iki tabloda ID ler eşleşen ama soldaki tabloda ( Product p) olan ama sağdaki tabloda (Order Details od) olmayan bilgileri getirir.
